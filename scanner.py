@@ -138,7 +138,6 @@ def filled_in(questions, gray):
 			index = question.index(darkest_color)
 			cv2.putText(gray, "v", (darkest_color[1], darkest_color[0]), font, 0.6, (0, 255, 0), 2 )
 			answers.append([questions.index(question), index, [darkest_color[1], darkest_color[0]] ])
-	# import code; code.interact(local=dict(globals(), **locals()))
 	return answers
 
 
@@ -153,12 +152,10 @@ def process(image):
 	answers = filled_in(questions, gray)
 	return answers, gray
 
-# import code; code.interact(local=dict(globals(), **locals()))	
-# -----
-# response to json 
 image = cv2.imread(args["image"])
 answers, gray = process(image)
 print(answers)
 
 cv2.imshow("th", gray)
 cv2.waitKey(0)
+# import code; code.interact(local=dict(globals(), **locals()))
