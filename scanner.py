@@ -7,14 +7,13 @@ import cv2
 from skimage.filter import threshold_adaptive
 from itertools import product
 
-# construct argument parser
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required = True,
-	help = "path to the input image")
-args = vars(ap.parse_args())
-
+# ap = argparse.ArgumentParser()
+# ap.add_argument("-i", "--image", required = True,
+# 	help = "path to the input image")
+# args = vars(ap.parse_args())
 
 def preprocess(image):
+	image = cv2.imread(image)
 	image = imutils.resize(image, height = 700)
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
@@ -140,8 +139,6 @@ def filled_in(questions, gray):
 			answers.append([questions.index(question), index, [darkest_color[1], darkest_color[0]] ])
 	return answers
 
-
-# ----
 def process(image):
 	gray = preprocess(image)
 	contours = all_contours(gray)
@@ -152,10 +149,11 @@ def process(image):
 	answers = filled_in(questions, gray)
 	return answers, gray
 
-image = cv2.imread(args["image"])
-answers, gray = process(image)
-print(answers)
+# image = cv2.imread(args["image"])
+# import code; code.interact(local=dict(globals(), **locals()))
+# answers, gray = process(image)
+# print(answers)
 
-cv2.imshow("th", gray)
-cv2.waitKey(0)
+# cv2.imshow("th", gray)
+# cv2.waitKey(0)
 # import code; code.interact(local=dict(globals(), **locals()))
